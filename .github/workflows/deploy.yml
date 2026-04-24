@@ -1,0 +1,33 @@
+name: Deploy DevOps Intake Form
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  validate-and-prep:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Validate HTML
+        uses: html5validator/html5validator-action@v1
+        with:
+          root: .
+          # This checks your index.html for common syntax errors
+          
+    #   - name: Security Check
+    #     run: |
+    #       # Simple check to ensure no hardcoded 'action' URLs with sensitive IDs
+    #       if grep -q "YOUR_ID_HERE" index.html; then
+    #         echo "::error::Placeholder ID detected! Please update the Formspree ID."
+    #         exit 1
+    #       fi
+
+  deploy-ready:
+    needs: validate-and-prep
+    runs-on: ubuntu-latest
+    steps:
+      - name: Signal Deployment
+        run: echo "Form validation passed. Site is ready for production sync."
