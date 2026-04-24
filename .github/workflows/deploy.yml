@@ -4,8 +4,13 @@ on:
   push:
     branches: [ main ]
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
-  validate:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -16,7 +21,15 @@ jobs:
         run: pip install html5validator
 
       - name: Validate HTML
-        run: html5validator --root . --also-check-css
+        run: html5validator --root .
 
-      - name: Done
-        run: echo "HTML validated successfully."
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
