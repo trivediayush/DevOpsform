@@ -41,12 +41,10 @@
         }
         input:focus, textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); }
 
-        /* Checklist Design */
         .checklist-box { background: var(--accent-bg); padding: 25px; border-radius: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .check-item { display: flex; align-items: flex-start; gap: 12px; font-size: 0.9rem; cursor: pointer; font-weight: 500; }
         .check-item input { width: auto; margin-top: 4px; cursor: pointer; }
 
-        /* Submit Button */
         button {
             width: 100%; background: var(--primary); color: white; padding: 20px; border: none; border-radius: 12px; font-size: 1.2rem; font-weight: 700; cursor: pointer; transition: 0.3s ease; margin-top: 20px;
         }
@@ -63,12 +61,20 @@
 
 <div class="container">
     <header>
-        <h1>Project Onboarding & DevOps Intake</h1>
+        <h1>Project Onboarding Form</h1>
         <p class="subtitle">Provide your project requirements to initialize the infrastructure design phase.</p>
     </header>
 
     <form action="https://formspree.io/f/mpqkkeeq" method="POST">
-        
+
+        <!-- Formspree Config -->
+        <input type="hidden" name="_subject" value="📄 DevOps Intake Report">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+
+        <!-- Section Marker -->
+        <input type="hidden" name="--- Project Overview ---" value="-----------------------------">
+
         <section>
             <h2>1. Project Overview</h2>
             <div class="form-grid">
@@ -92,6 +98,8 @@
                 </div>
             </div>
         </section>
+
+        <input type="hidden" name="--- Hosting & Domain Management ---" value="-----------------------------">
 
         <section>
             <h2>2. Hosting & Domain Management</h2>
@@ -124,69 +132,67 @@
             </div>
         </section>
 
+        <input type="hidden" name="--- DevOps Lifecycle Requirements ---" value="-----------------------------">
+
         <section>
             <h2>3. DevOps Lifecycle Requirements</h2>
             <span class="hint">Please select the services you wish to have configured for this project.</span>
             <div class="checklist-box">
-                <label class="check-item"><input type="checkbox" name="Lifecycle" value="Version_Control"> Version Control (Git/GitLab)</label>
-                <label class="check-item"><input type="checkbox" name="Lifecycle" value="Agile_Tools"> Agile Tooling Integration</label>
-                <label class="check-item"><input type="checkbox" name="Lifecycle" value="Coding_Standards"> Coding Standards & Peer Review</label>
-                <label class="check-item"><input type="checkbox" name="Lifecycle" value="Branching_Strategy"> Branching Strategy Implementation</label>
-                <label class="check-item"><input type="checkbox" name="Lifecycle" value="Build_Automation"> Build Automation (Maven/npm/Make)</label>
-                <label class="check-item"><input type="checkbox" name="Lifecycle" value="CI_Pipelines"> CI/CD Pipelines (Jenkins/GitHub Actions)</label>
-                <label class="check-item"><input type="checkbox" name="Lifecycle" value="Automated_Triggers"> Automated Build Triggers</label>
-                <label class="check-item"><input type="checkbox" name="Lifecycle" value="Artifact_Repo"> Artifact Repo (DockerHub/ECR)</label>
-                <label class="check-item"><input type="checkbox" name="Lifecycle" value="Rollback_Strategy"> Automated Rollback Strategy</label>
-                <label class="check-item"><input type="checkbox" name="Lifecycle" value="Backup_Strategy"> Scheduled Backup Strategy</label>
-                <label class="check-item"><input type="checkbox" name="Lifecycle" value="IaC_Tools"> Infrastructure as Code (Terraform)</label>
-                <label class="check-item"><input type="checkbox" name="Lifecycle" value="Containerization"> Containerization (Docker)</label>
-                <label class="check-item"><input type="checkbox" name="Lifecycle" value="Orchestration"> Orchestration (Kubernetes)</label>
-                <label class="check-item"><input type="checkbox" name="Lifecycle" value="Performance_Monitoring"> Monitoring & Uptime Metrics</label>
-                <label class="check-item"><input type="checkbox" name="Lifecycle" value="Code_Scanning"> Security Code Scanning</label>
-                <label class="check-item"><input type="checkbox" name="Lifecycle" value="Secrets_Management"> Secure Secrets Management</label>
+                <label class="check-item"><input type="checkbox" name="Lifecycle[]" value="Version_Control"> Version Control (Git/GitLab)</label>
+                <label class="check-item"><input type="checkbox" name="Lifecycle[]" value="Agile_Tools"> Agile Tooling Integration</label>
+                <label class="check-item"><input type="checkbox" name="Lifecycle[]" value="Coding_Standards"> Coding Standards & Peer Review</label>
+                <label class="check-item"><input type="checkbox" name="Lifecycle[]" value="Branching_Strategy"> Branching Strategy Implementation</label>
+                <label class="check-item"><input type="checkbox" name="Lifecycle[]" value="Build_Automation"> Build Automation</label>
+                <label class="check-item"><input type="checkbox" name="Lifecycle[]" value="CI_Pipelines"> CI/CD Pipelines</label>
+                <label class="check-item"><input type="checkbox" name="Lifecycle[]" value="Automated_Triggers"> Automated Build Triggers</label>
+                <label class="check-item"><input type="checkbox" name="Lifecycle[]" value="Artifact_Repo"> Artifact Repo</label>
+                <label class="check-item"><input type="checkbox" name="Lifecycle[]" value="Rollback_Strategy"> Automated Rollback Strategy</label>
+                <label class="check-item"><input type="checkbox" name="Lifecycle[]" value="Backup_Strategy"> Scheduled Backup Strategy</label>
+                <label class="check-item"><input type="checkbox" name="Lifecycle[]" value="IaC_Tools"> Infrastructure as Code</label>
+                <label class="check-item"><input type="checkbox" name="Lifecycle[]" value="Containerization"> Containerization</label>
+                <label class="check-item"><input type="checkbox" name="Lifecycle[]" value="Orchestration"> Orchestration</label>
+                <label class="check-item"><input type="checkbox" name="Lifecycle[]" value="Performance_Monitoring"> Monitoring</label>
+                <label class="check-item"><input type="checkbox" name="Lifecycle[]" value="Code_Scanning"> Security Code Scanning</label>
+                <label class="check-item"><input type="checkbox" name="Lifecycle[]" value="Secrets_Management"> Secure Secrets Management</label>
             </div>
         </section>
+
+        <input type="hidden" name="--- Technical Specifications ---" value="-----------------------------">
 
         <section>
             <h2>4. Technical Specifications</h2>
             <div class="form-grid">
                 <div class="field full-width">
                     <label>Codebase & Stack Details</label>
-                    <span class="hint">What language and version is the app? (e.g., Node 20, Python 3.11)</span>
-                    <textarea name="Stack_Details" rows="2" placeholder="Primary language, framework, and versions..."></textarea>
+                    <textarea name="Stack_Details"></textarea>
                 </div>
                 <div class="field">
                     <label>Dependencies</label>
-                    <span class="hint">Specific libraries or OS packages required.</span>
-                    <textarea name="Dependencies" rows="2" placeholder="List any specific packages..."></textarea>
+                    <textarea name="Dependencies"></textarea>
                 </div>
                 <div class="field">
                     <label>Database & Data Management</label>
-                    <span class="hint">Type of DB? Are migrations needed?</span>
-                    <textarea name="Database_Info" rows="2" placeholder="e.g. Postgres, MongoDB..."></textarea>
+                    <textarea name="Database_Info"></textarea>
                 </div>
                 <div class="field">
                     <label>Environment Configurations</label>
-                    <span class="hint">List the keys for .env or settings files (No passwords).</span>
-                    <textarea name="Config_Files" rows="2"></textarea>
+                    <textarea name="Config_Files"></textarea>
                 </div>
                 <div class="field">
                     <label>Build & Deployment Instructions</label>
-                    <span class="hint">Specific commands to build or run the app.</span>
-                    <textarea name="Instructions" rows="2"></textarea>
+                    <textarea name="Instructions"></textarea>
                 </div>
                 <div class="field">
                     <label>Access Control</label>
-                    <input type="text" name="Access_Control" placeholder="Who manages deployment tags?">
+                    <input type="text" name="Access_Control">
                 </div>
                 <div class="field">
                     <label>Build Retention Policy</label>
-                    <input type="text" name="Retention" placeholder="e.g. Keep last 50 builds">
+                    <input type="text" name="Retention">
                 </div>
                 <div class="field full-width">
                     <label>Special Considerations / Remarks</label>
-                    <span class="hint">Downtime limits, compatibility issues, etc.</span>
-                    <textarea name="Remarks" rows="2"></textarea>
+                    <textarea name="Remarks"></textarea>
                 </div>
             </div>
         </section>
