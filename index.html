@@ -1,157 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DevOps Intake Portal</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Infrastructure Discovery Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --accent-bg: #f1f5f9;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: var(--text-main); line-height: 1.6; padding: 20px; }
 
-<style>
-body {
-    font-family: 'Inter', sans-serif;
-    background: #f6f8fb;
-    margin: 0;
-}
+        .container { max-width: 900px; margin: 40px auto; background: var(--card); padding: 50px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); }
 
-.container {
-    max-width: 1000px;
-    margin: 40px auto;
-    background: #fff;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-}
+        header { text-align: center; margin-bottom: 50px; border-bottom: 1px solid var(--border); padding-bottom: 30px; }
+        h1 { font-size: 2rem; color: var(--primary); margin-bottom: 10px; }
+        .subtitle { color: var(--text-muted); font-size: 1.1rem; }
 
-h1 { color: #2563eb; }
-h2 { margin-top: 30px; border-left: 4px solid #2563eb; padding-left: 10px; }
+        section { margin-bottom: 45px; }
+        h2 { font-size: 1.4rem; margin-bottom: 25px; padding-left: 15px; border-left: 5px solid var(--primary); color: var(--text-main); }
 
-.form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+        .full-width { grid-column: span 2; }
 
-.full-width { grid-column: span 2; }
+        .field { margin-bottom: 20px; }
+        label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.95rem; }
+        .hint { display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px; line-height: 1.4; }
 
-input, select, textarea {
-    width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-}
+        input, select, textarea {
+            width: 100%; padding: 14px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 1rem; transition: 0.2s; background: #fff;
+        }
+        input:focus, textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); }
 
-.checklist-box {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    background: #f1f5f9;
-    padding: 20px;
-    border-radius: 10px;
-}
+        .checklist-box { background: var(--accent-bg); padding: 25px; border-radius: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .check-item { display: flex; align-items: flex-start; gap: 12px; font-size: 0.9rem; cursor: pointer; font-weight: 500; }
+        .check-item input { width: auto; margin-top: 4px; cursor: pointer; }
 
-button {
-    width: 100%;
-    padding: 16px;
-    background: #2563eb;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-size: 16px;
-    margin-top: 20px;
-}
-</style>
+        button {
+            width: 100%; background: var(--primary); color: white; padding: 20px; border: none; border-radius: 12px; font-size: 1.2rem; font-weight: 700; cursor: pointer; transition: 0.3s ease; margin-top: 20px;
+        }
+        button:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2); }
+
+        @media (max-width: 768px) {
+            .form-grid, .checklist-box { grid-template-columns: 1fr; }
+            .container { padding: 25px; margin: 10px auto; }
+            h1 { font-size: 1.6rem; }
+        }
+    </style>
 </head>
-
 <body>
 
 <div class="container">
+    <header>
+        <h1>Project Onboarding Form</h1>
+        <p class="subtitle">Provide your project requirements to initialize the infrastructure design phase.</p>
+    </header>
 
-<h1>DevOps Project Intake</h1>
+    <form action="https://formspree.io/f/mpqkkeeq" method="POST">
 
-<form action="https://formspree.io/f/mpqkkeeq" method="POST">
+        <!-- Formspree Config -->
+        <input type="hidden" name="_subject" value="📄 DevOps Intake Report">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
 
-<!-- Formspree config -->
-<input type="hidden" name="_subject" value="📄 DevOps Intake Report">
-<input type="hidden" name="_template" value="table">
+        <!-- Section Marker -->
+        <input type="hidden" name="--- Project Overview ---" value="-----------------------------">
 
-<!-- Section markers -->
-<input type="hidden" name="--- Project Overview ---" value="---">
+        <section>
+            <h2>1. Project Overview</h2>
+            <div class="form-grid">
+                <div class="field">
+                    <label>Project Name</label>
+                    <input type="text" name="Project_Name" placeholder="e.g. Acme Mobile App" required>
+                </div>
+                <div class="field">
+                    <label>Project Owner/Manager</label>
+                    <input type="text" name="Owner_Name" required>
+                </div>
+                <div class="field">
+                    <label>Repository URL</label>
+                    <span class="hint">Where is your code stored? (GitHub/GitLab/Bitbucket)</span>
+                    <input type="url" name="Repo_URL" placeholder="https://github.com/org/repo">
+                </div>
+                <div class="field">
+                    <label>Target Deployment Branch</label>
+                    <span class="hint">Which branch should be used for Production?</span>
+                    <input type="text" name="Main_Branch" placeholder="e.g. main or master">
+                </div>
+            </div>
+        </section>
 
-<h2>1. Project Overview</h2>
+        <input type="hidden" name="--- Hosting & Domain Management ---" value="-----------------------------">
 
-<div class="form-grid">
-<input type="text" name="Project_Name" placeholder="Project Name" required>
-<input type="text" name="Owner_Name" placeholder="Owner Name" required>
-<input type="url" name="Repo_URL" placeholder="Repo URL">
-<input type="text" name="Main_Branch" placeholder="Main Branch">
-</div>
+        <section>
+            <h2>2. Hosting & Domain Management</h2>
+            <div class="form-grid">
+                <div class="field">
+                    <label>Cloud Provider Preference</label>
+                    <span class="hint">Where would you like to host your application?</span>
+                    <select name="Cloud_Provider">
+                        <option value="Unsure">I am unsure (Provide recommendation)</option>
+                        <option value="AWS">AWS (Amazon Web Services)</option>
+                        <option value="GCP">Google Cloud Platform</option>
+                        <option value="Azure">Microsoft Azure</option>
+                        <option value="DigitalOcean">DigitalOcean</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Target Domain Name</label>
+                    <span class="hint">Do you have a registered domain (e.g., example.com)?</span>
+                    <input type="text" name="Domain_Name" placeholder="e.g., myapp.com">
+                </div>
+                <div class="field full-width">
+                    <label>Domain Management Status</label>
+                    <select name="Domain_Status">
+                        <option value="Already_Owned">I already own the domain</option>
+                        <option value="Need_Purchase">I need help purchasing a domain</option>
+                        <option value="Need_Transfer">I want to transfer a domain to the cloud provider</option>
+                        <option value="Unsure">Unsure / Need help deciding</option>
+                    </select>
+                </div>
+            </div>
+        </section>
 
-<input type="hidden" name="--- Hosting & Domain ---" value="---">
+        <input type="hidden" name="--- DevOps Lifecycle Requirements ---" value="-----------------------------">
 
-<h2>2. Hosting & Domain</h2>
+        <section>
+            <h2>3. DevOps Lifecycle Requirements</h2>
+            <span class="hint">Please select the services you wish to have configured for this project.</span>
+            <div class="checklist-box">
+                <label class="check-item"><input type="checkbox" name="Lifecycle[]" value="Version_Control"> Version Control (Git/GitLab)</label>
+                <label class="check-item"><input type="checkbox" name="Lifecycle[]" value="Agile_Tools"> Agile Tooling Integration</label>
+                <label class="check-item"><input type="checkbox" name="Lifecycle[]" value="Coding_Standards"> Coding Standards & Peer Review</label>
+                <label class="check-item"><input type="checkbox" name="Lifecycle[]" value="Branching_Strategy"> Branching Strategy Implementation</label>
+                <label class="check-item"><input type="checkbox" name="Lifecycle[]" value="Build_Automation"> Build Automation</label>
+                <label class="check-item"><input type="checkbox" name="Lifecycle[]" value="CI_Pipelines"> CI/CD Pipelines</label>
+                <label class="check-item"><input type="checkbox" name="Lifecycle[]" value="Automated_Triggers"> Automated Build Triggers</label>
+                <label class="check-item"><input type="checkbox" name="Lifecycle[]" value="Artifact_Repo"> Artifact Repo</label>
+                <label class="check-item"><input type="checkbox" name="Lifecycle[]" value="Rollback_Strategy"> Automated Rollback Strategy</label>
+                <label class="check-item"><input type="checkbox" name="Lifecycle[]" value="Backup_Strategy"> Scheduled Backup Strategy</label>
+                <label class="check-item"><input type="checkbox" name="Lifecycle[]" value="IaC_Tools"> Infrastructure as Code</label>
+                <label class="check-item"><input type="checkbox" name="Lifecycle[]" value="Containerization"> Containerization</label>
+                <label class="check-item"><input type="checkbox" name="Lifecycle[]" value="Orchestration"> Orchestration</label>
+                <label class="check-item"><input type="checkbox" name="Lifecycle[]" value="Performance_Monitoring"> Monitoring</label>
+                <label class="check-item"><input type="checkbox" name="Lifecycle[]" value="Code_Scanning"> Security Code Scanning</label>
+                <label class="check-item"><input type="checkbox" name="Lifecycle[]" value="Secrets_Management"> Secure Secrets Management</label>
+            </div>
+        </section>
 
-<div class="form-grid">
-<select name="Cloud_Provider">
-<option value="Unsure">Unsure</option>
-<option value="AWS">AWS</option>
-<option value="GCP">GCP</option>
-<option value="Azure">Azure</option>
-<option value="DigitalOcean">DigitalOcean</option>
-</select>
+        <input type="hidden" name="--- Technical Specifications ---" value="-----------------------------">
 
-<input type="text" name="Domain_Name" placeholder="Domain Name">
+        <section>
+            <h2>4. Technical Specifications</h2>
+            <div class="form-grid">
+                <div class="field full-width">
+                    <label>Codebase & Stack Details</label>
+                    <textarea name="Stack_Details"></textarea>
+                </div>
+                <div class="field">
+                    <label>Dependencies</label>
+                    <textarea name="Dependencies"></textarea>
+                </div>
+                <div class="field">
+                    <label>Database & Data Management</label>
+                    <textarea name="Database_Info"></textarea>
+                </div>
+                <div class="field">
+                    <label>Environment Configurations</label>
+                    <textarea name="Config_Files"></textarea>
+                </div>
+                <div class="field">
+                    <label>Build & Deployment Instructions</label>
+                    <textarea name="Instructions"></textarea>
+                </div>
+                <div class="field">
+                    <label>Access Control</label>
+                    <input type="text" name="Access_Control">
+                </div>
+                <div class="field">
+                    <label>Build Retention Policy</label>
+                    <input type="text" name="Retention">
+                </div>
+                <div class="field full-width">
+                    <label>Special Considerations / Remarks</label>
+                    <textarea name="Remarks"></textarea>
+                </div>
+            </div>
+        </section>
 
-<select name="Domain_Status" class="full-width">
-<option value="Already_Owned">Already Owned</option>
-<option value="Need_Purchase">Need Purchase</option>
-<option value="Need_Transfer">Need Transfer</option>
-<option value="Unsure">Unsure</option>
-</select>
-</div>
-
-<input type="hidden" name="--- DevOps Lifecycle ---" value="---">
-
-<h2>3. DevOps Lifecycle</h2>
-
-<div class="checklist-box">
-<label><input type="checkbox" name="Lifecycle[]" value="Version_Control"> Version Control</label>
-<label><input type="checkbox" name="Lifecycle[]" value="Agile_Tools"> Agile Tools</label>
-<label><input type="checkbox" name="Lifecycle[]" value="Coding_Standards"> Coding Standards</label>
-<label><input type="checkbox" name="Lifecycle[]" value="Branching_Strategy"> Branching Strategy</label>
-<label><input type="checkbox" name="Lifecycle[]" value="Build_Automation"> Build Automation</label>
-<label><input type="checkbox" name="Lifecycle[]" value="CI_Pipelines"> CI/CD Pipelines</label>
-<label><input type="checkbox" name="Lifecycle[]" value="Automated_Triggers"> Automated Triggers</label>
-<label><input type="checkbox" name="Lifecycle[]" value="Artifact_Repo"> Artifact Repo</label>
-<label><input type="checkbox" name="Lifecycle[]" value="Rollback_Strategy"> Rollback Strategy</label>
-<label><input type="checkbox" name="Lifecycle[]" value="Backup_Strategy"> Backup Strategy</label>
-<label><input type="checkbox" name="Lifecycle[]" value="IaC_Tools"> Infrastructure as Code</label>
-<label><input type="checkbox" name="Lifecycle[]" value="Containerization"> Docker</label>
-<label><input type="checkbox" name="Lifecycle[]" value="Orchestration"> Kubernetes</label>
-<label><input type="checkbox" name="Lifecycle[]" value="Performance_Monitoring"> Monitoring</label>
-<label><input type="checkbox" name="Lifecycle[]" value="Code_Scanning"> Security Scanning</label>
-<label><input type="checkbox" name="Lifecycle[]" value="Secrets_Management"> Secrets Management</label>
-</div>
-
-<input type="hidden" name="--- Technical Specifications ---" value="---">
-
-<h2>4. Technical Specifications</h2>
-
-<div class="form-grid">
-<textarea name="Stack_Details" class="full-width" placeholder="Stack details"></textarea>
-<textarea name="Dependencies" placeholder="Dependencies"></textarea>
-<textarea name="Database_Info" placeholder="Database info"></textarea>
-<textarea name="Config_Files" placeholder="Config"></textarea>
-<textarea name="Instructions" placeholder="Instructions"></textarea>
-<input type="text" name="Access_Control" placeholder="Access control">
-<input type="text" name="Retention" placeholder="Retention">
-<textarea name="Remarks" class="full-width" placeholder="Remarks"></textarea>
-</div>
-
-<button type="submit">Submit Request</button>
-
-</form>
-
+        <button type="submit">Initialize Infrastructure Request</button>
+    </form>
 </div>
 
 </body>
